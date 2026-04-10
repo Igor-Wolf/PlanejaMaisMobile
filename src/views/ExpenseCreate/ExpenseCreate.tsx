@@ -17,17 +17,17 @@ import * as yup from "yup"; // Importação mantida como 'yup'
 import { createExpenseService, editExpenseService } from "./actions";
 
 export default function ExpenseCreate({ route }) {
-  const { item } = route.params || {}
+  const { item } = route.params || {};
   const navigation = useNavigation();
 
   // Estados dos inputs
-  const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
-  const [valueExpense, setValueExpense] = useState('');
-    const [date, setDate] = useState(new Date());
-    
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [valueExpense, setValueExpense] = useState("");
+  const [date, setDate] = useState(new Date());
+
   const [showPicker, setShowPicker] = useState(false);
-  const [type, setType] = useState(item.type === '+' ? "Entrada" : "Despesa");
+  const [type, setType] = useState(item.type === "+" ? "Entrada" : "Despesa");
 
   const data = [
     { label: "Entrada", value: "Entrada" },
@@ -84,7 +84,7 @@ export default function ExpenseCreate({ route }) {
 
         if (response.status === 201) {
           Alert.alert("Sucesso", "Lançamento criado com sucesso!");
-          navigation.navigate('Home');
+          navigation.navigate("Home");
         }
       } catch {}
 
@@ -107,9 +107,9 @@ export default function ExpenseCreate({ route }) {
   };
 
   return (
-    <ExternalContainer contentContainerStyle={{ gap: 15, padding: 5 }}>
+    <ExternalContainer contentContainerStyle={{ gap: 15, padding: 5, paddingBotton: 40 }}>
       <TitleBox>
-              <TitleText>Criar { item.type === '+'? 'Entrada' : 'Despesa' }</TitleText>
+        <TitleText>Criar {item.type === "+" ? "Entrada" : "Despesa"}</TitleText>
       </TitleBox>
 
       <NormalText>Descrição:</NormalText>
@@ -117,6 +117,7 @@ export default function ExpenseCreate({ route }) {
         value={description}
         onChangeText={setDescription}
         placeholder="Digite a descrição"
+        placeholderTextColor="black"
       />
 
       <NormalText>Categoria:</NormalText>
@@ -124,6 +125,7 @@ export default function ExpenseCreate({ route }) {
         value={category}
         onChangeText={setCategory}
         placeholder="Digite a categoria"
+        placeholderTextColor="black"
       />
 
       <NormalText>Valor:</NormalText>
@@ -132,9 +134,8 @@ export default function ExpenseCreate({ route }) {
         onChangeText={setValueExpense}
         placeholder="Digite o valor"
         keyboardType="numeric"
+        placeholderTextColor="black"
       />
-
-      
 
       <NormalText>Data do Lançamento:</NormalText>
       <TouchableOpacity onPress={() => setShowPicker(true)}>
@@ -165,7 +166,7 @@ export default function ExpenseCreate({ route }) {
 
       <ButtonGeneral
         onPress={() => navigation.goBack()}
-        style={{ backgroundColor: "red" }}
+        style={{ backgroundColor: "red" , marginBotton: 40}}
       >
         <NormalText>Voltar</NormalText>
         <Ionicons name="arrow-undo-sharp" size={24} color="white" />

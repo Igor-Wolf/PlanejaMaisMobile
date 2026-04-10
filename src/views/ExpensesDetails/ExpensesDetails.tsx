@@ -35,7 +35,7 @@ export default function ExpenseDetails({ route }) {
   };
 
   return (
-    <ExternalContainer contentContainerStyle={{ gap: 15, padding: 5 }}>
+    <ExternalContainer contentContainerStyle={{ gap: 15, padding: 5, paddingBotton: 40 }}>
       <TitleBox>
         <TitleText>Detalhes</TitleText>
         <ButtonDelete onPress={handlePressDelete}>
@@ -89,7 +89,7 @@ export default function ExpenseDetails({ route }) {
       </ButtonGeneral>
       <ButtonGeneral
         onPress={() => navigation.goBack()}
-        style={{ backgroundColor: "red" }}
+        style={{ backgroundColor: "red", marginBotton: 40 }}
       >
         <NormalText>Voltar</NormalText>
         <Ionicons name="arrow-undo-sharp" size={24} color="white" />

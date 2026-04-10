@@ -7,6 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import Sobre from "../views/Sobre/Sobre";
 import LancamentosStack from "./LancamentosStack";
 import MyAccountStack from "./MyAccountStack";
+import MetasStack from "./MetasStack";
 
 const Drawer = createDrawerNavigator();
 
@@ -45,6 +46,11 @@ export default function MyDrawer() {
         name="Lancamentos"
         component={LancamentosStack}
         options={{ title: "Lançamentos" }}
+      />
+      <Drawer.Screen
+        name="Metas"
+        component={MetasStack}
+        options={{ title: "Metas" }}
       />
       <Drawer.Screen
         name="MinhaConta"

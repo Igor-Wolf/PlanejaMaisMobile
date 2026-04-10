@@ -16,6 +16,7 @@ export const SclrollContainer = styled.ScrollView`
   background-color: black;
   height: 100%;
   padding-bottom: 120px;
+  
 `;
 
 

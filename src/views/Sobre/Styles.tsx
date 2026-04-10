@@ -30,13 +30,27 @@ export const LogoImage = styled.Image`
   border-width: 2px;
   border-color: #066e74;
   margin-bottom: 20px;
-  margin-top:20px;
+  margin-top: 20px;
 `;
-
 
 export const LowerText = styled.Text`
   color: gray;
   font-weight: 600;
   font-size: 16px;
+  margin-top: 20px;
+  text-align: center;
+`;
+
+export const ButtonText = styled.Text`
+  color: white;
+  font-size: 20px;
+  padding: 10px;
+  text-align: center;
+  font-weight: 600;
+`;
+
+export const DonwloadButton = styled.Pressable`
+  background-color: #066e74;
+  border-radius: 10px;
   margin-top: 20px;
 `;

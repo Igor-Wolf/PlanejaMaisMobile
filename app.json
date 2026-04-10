@@ -2,7 +2,7 @@
   "expo": {
     "name": "PlanejaMaisMobile",
     "slug": "PlanejaMaisMobile",
-    "version": "0.4",
+    "version": "0.4.1",
     "orientation": "portrait",
     "icon": "./assets/logoicon.png",
     "userInterfaceStyle": "light",
@@ -21,7 +21,8 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.anonymous.PlanejaMaisMobile"
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -4,43 +4,37 @@ export const ExternalContainer = styled.ScrollView`
   display: flex;
   flex: 1;
   background-color: black;
-  flex-direction:column;
-  padding-top:10px;
+  flex-direction: column;
+  padding-top: 10px;
+  padding-bottom: 20px;
 `;
 
 export const TitleBox = styled.View`
-    
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
 
 export const ButtonDelete = styled.TouchableOpacity`
-    
-
-    background-color: red;
-    align-items: center;
-    justify-content: center;
-    height: 50px;
-    width: 50px;
-    border-radius: 10px;
-    elevation: 50;
-
-`
+  background-color: red;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 50px;
+  border-radius: 10px;
+  elevation: 50;
+`;
 export const ButtonGeneral = styled.TouchableOpacity`
-    
-    display:flex;
-    flex-direction: row;
-    gap: 10px;    
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 50px;
-    border-radius: 10px;
-    elevation: 50;
-
-`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  elevation: 50;
+`;
 export const CategoryContainerExternal = styled.View`
   align-self: flex-start;
 `;
@@ -64,10 +58,7 @@ export const NormalText = styled.Text`
 `;
 
 export const LowerText = styled.Text`
-    
-
-    color: gray;
-    font-weight: 600;
-    font-size: 16px;
-
-`
+  color: gray;
+  font-weight: 600;
+  font-size: 16px;
+`;

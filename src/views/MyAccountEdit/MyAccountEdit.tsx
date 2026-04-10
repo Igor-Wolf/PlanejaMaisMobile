@@ -118,11 +118,11 @@ export default function MyAccountEdit({ route }) {
 
       // Exemplo de chamada de serviço:
 
-         const response = await editUserService( updatedUser);
-         if (response.status === 200) {
-           Alert.alert("Sucesso", "Perfil atualizado com sucesso!");
-           navigation.goBack();
-         }
+      const response = await editUserService(updatedUser);
+      if (response.status === 200) {
+        Alert.alert("Sucesso", "Perfil atualizado com sucesso!");
+        navigation.goBack();
+      }
 
       //Alert.alert("Sucesso", "Dados validados com sucesso!");
     } catch (error) {
@@ -143,7 +143,7 @@ export default function MyAccountEdit({ route }) {
   };
 
   return (
-    <ExternalContainer contentContainerStyle={{ gap: 15, padding: 15 }}>
+    <ExternalContainer contentContainerStyle={{ gap: 15, padding: 15, paddingBotton: 40}}>
       <TitleBox>
         <TitleText>Editar Conta</TitleText>
       </TitleBox>
@@ -153,6 +153,7 @@ export default function MyAccountEdit({ route }) {
         value={name}
         onChangeText={setName}
         placeholder="Digite o nome"
+        placeholderTextColor="black"
       />
 
       <NormalText>E-mail:</NormalText>
@@ -161,6 +162,7 @@ export default function MyAccountEdit({ route }) {
         onChangeText={setEmail}
         placeholder="Digite o e-mail"
         keyboardType="email-address"
+        placeholderTextColor="black"
       />
 
       <NormalText>Nova Senha (deixe vazio para não alterar):</NormalText>
@@ -169,6 +171,7 @@ export default function MyAccountEdit({ route }) {
         onChangeText={setPassword}
         placeholder="Digite a nova senha"
         secureTextEntry
+        placeholderTextColor="black"
       />
 
       <NormalText>Confirmar Nova Senha:</NormalText>
@@ -177,6 +180,7 @@ export default function MyAccountEdit({ route }) {
         onChangeText={setConfirmPassword}
         placeholder="Confirme a nova senha"
         secureTextEntry
+        placeholderTextColor="black"
       />
 
       <NormalText>Data de Nascimento:</NormalText>
@@ -207,7 +211,7 @@ export default function MyAccountEdit({ route }) {
 
       <ButtonGeneral
         onPress={() => navigation.goBack()}
-        style={{ backgroundColor: "red" }}
+        style={{ backgroundColor: "red", marginBotton: 40 }}
       >
         <NormalText style={{ color: "white" }}>Cancelar</NormalText>
         <Ionicons name="close-circle-outline" size={24} color="white" />

@@ -85,7 +85,7 @@ export default function ExpenseEdit({ route }) {
 
         if (response.status === 200) {
           Alert.alert("Sucesso", "Lançamento atualizado com sucesso!");
-          navigation.navigate('Home');
+          navigation.navigate("Home");
         }
       } catch {}
 
@@ -108,7 +108,7 @@ export default function ExpenseEdit({ route }) {
   };
 
   return (
-    <ExternalContainer contentContainerStyle={{ gap: 15, padding: 5 }}>
+    <ExternalContainer contentContainerStyle={{ gap: 15, padding: 5, paddingBotton:40 }}>
       <TitleBox>
         <TitleText>Editar</TitleText>
       </TitleBox>
@@ -118,6 +118,7 @@ export default function ExpenseEdit({ route }) {
         value={description}
         onChangeText={setDescription}
         placeholder="Digite a descrição"
+        placeholderTextColor="black"
       />
 
       <NormalText>Categoria:</NormalText>
@@ -125,6 +126,7 @@ export default function ExpenseEdit({ route }) {
         value={category}
         onChangeText={setCategory}
         placeholder="Digite a categoria"
+        placeholderTextColor="black"
       />
 
       <NormalText>Valor:</NormalText>
@@ -133,6 +135,7 @@ export default function ExpenseEdit({ route }) {
         onChangeText={setValueExpense}
         placeholder="Digite o valor"
         keyboardType="numeric"
+        placeholderTextColor="black"
       />
 
       <NormalText>Tipo:</NormalText>
@@ -165,16 +168,16 @@ export default function ExpenseEdit({ route }) {
 
       {/* Botão Salvar agora chama a função handleSave */}
       <ButtonGeneral
-              onPress={handleSave}
-              style={{ backgroundColor: "#066e74" }}
-            >
-              <NormalText style={{ color: "white" }}>Salvar Alterações</NormalText>
-              <Ionicons name="save-outline" size={24} color="white" />
-            </ButtonGeneral>
+        onPress={handleSave}
+        style={{ backgroundColor: "#066e74" }}
+      >
+        <NormalText style={{ color: "white" }}>Salvar Alterações</NormalText>
+        <Ionicons name="save-outline" size={24} color="white" />
+      </ButtonGeneral>
 
       <ButtonGeneral
         onPress={() => navigation.goBack()}
-        style={{ backgroundColor: "red" }}
+        style={{ backgroundColor: "red" , marginBotton: 40}}
       >
         <NormalText>Voltar</NormalText>
         <Ionicons name="arrow-undo-sharp" size={24} color="white" />

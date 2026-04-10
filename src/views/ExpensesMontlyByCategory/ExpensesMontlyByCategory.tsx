@@ -36,7 +36,10 @@ export default function ExpensesMontlyByCategory({ route }) {
     
     return (
         
-        <ExternalContainer>
+        <ExternalContainer contentContainerStyle={{ 
+    paddingBottom: 40, // Ajuste o valor conforme a necessidade
+    
+  }}>
             <TitleText>Categoria {categoryChoosed}</TitleText>
             
             {
@@ -44,7 +47,7 @@ export default function ExpensesMontlyByCategory({ route }) {
             }
             <ButtonGeneral
                     onPress={() => navigation.goBack()}
-                    style={{ backgroundColor: "red" }}
+                    style={{ backgroundColor: "red", marginBotton: 40 }}
                   >
                     <NormalText>Voltar</NormalText>
                     <Ionicons name="arrow-undo-sharp" size={24} color="white" />
