@@ -3,7 +3,7 @@ Aplicativo Mobile do Planeja +
 
 
 
-![Organização dos Arquivos](https://github.com/user-attachments/assets/2350fa77-5c6b-47d3-a7aa-40f3fcd1883a)
+![Organização dos Arquivos](https://github.com/Igor-Wolf/PlanejaMaisMobile/blob/main/cover.png?raw=true)
 
 
 
