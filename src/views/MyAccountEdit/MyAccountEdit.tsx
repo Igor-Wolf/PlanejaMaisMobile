@@ -143,7 +143,10 @@ export default function MyAccountEdit({ route }) {
   };
 
   return (
-    <ExternalContainer contentContainerStyle={{ gap: 15, padding: 15, paddingBotton: 40}}>
+    <ExternalContainer contentContainerStyle={{ gap: 15, paddingTop: 5,
+        paddingBottom: 50,
+        paddingLeft: 5,
+        paddingRight: 5,}}>
       <TitleBox>
         <TitleText>Editar Conta</TitleText>
       </TitleBox>
@@ -211,7 +214,7 @@ export default function MyAccountEdit({ route }) {
 
       <ButtonGeneral
         onPress={() => navigation.goBack()}
-        style={{ backgroundColor: "red", marginBotton: 40 }}
+        style={{ backgroundColor: "red" }}
       >
         <NormalText style={{ color: "white" }}>Cancelar</NormalText>
         <Ionicons name="close-circle-outline" size={24} color="white" />

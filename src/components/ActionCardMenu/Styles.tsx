@@ -19,6 +19,8 @@ export const MenuBox = styled.View`
   shadow-color: #000;
   shadow-opacity: 0.3;
   shadow-radius: 5px;
+  align-items: flex-start;
+  justify-content: center;
 `;
 
 export const MenuItem = styled.TouchableOpacity`

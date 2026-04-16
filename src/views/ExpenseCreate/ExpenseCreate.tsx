@@ -107,7 +107,10 @@ export default function ExpenseCreate({ route }) {
   };
 
   return (
-    <ExternalContainer contentContainerStyle={{ gap: 15, padding: 5, paddingBotton: 40 }}>
+    <ExternalContainer contentContainerStyle={{ gap: 15, paddingTop: 5,
+        paddingBottom: 50,
+        paddingLeft: 5,
+        paddingRight: 5,}}>
       <TitleBox>
         <TitleText>Criar {item.type === "+" ? "Entrada" : "Despesa"}</TitleText>
       </TitleBox>
@@ -166,7 +169,7 @@ export default function ExpenseCreate({ route }) {
 
       <ButtonGeneral
         onPress={() => navigation.goBack()}
-        style={{ backgroundColor: "red" , marginBotton: 40}}
+        style={{ backgroundColor: "red" }}
       >
         <NormalText>Voltar</NormalText>
         <Ionicons name="arrow-undo-sharp" size={24} color="white" />

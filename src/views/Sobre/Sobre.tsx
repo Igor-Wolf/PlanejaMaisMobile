@@ -59,7 +59,7 @@ export default function Sobre() {
               A versão mais recente disponível é{" "}
               {versionReq} de {dateBuild && (new Intl.DateTimeFormat('pt-BR').format(new Date(dateBuild)))}
             </LowerText>
-            <DonwloadButton  styles={{marginBotton: 40}}>
+            <DonwloadButton  >
               <ButtonText onPress={openUrl}>Baixar</ButtonText>
             </DonwloadButton>
           </>

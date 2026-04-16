@@ -9,6 +9,7 @@ export const ExternalContainer = styled.ScrollView`
   padding-bottom: 20px;
 `;
 
+
 export const NormalText = styled.Text`
   color: white;
   font-weight: 600;

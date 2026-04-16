@@ -21,17 +21,18 @@ import ReceitasPorCategoria from "../../components/ReceitasPorCategoria";
 import { api } from "../../api/backApi";
 
 export default function Home() {
-    const navigation = useNavigation();
-  
+  const navigation = useNavigation();
+
   const [token, setToken] = useState("");
   const [dataRef, setDataRef] = useState(new Date());
   const [dateNow, setDateNow] = useState(new Date());
   const [menuVisible, setMenuVisible] = useState(false);
-  const [refreshing, setRefreshing] = useState(false);
+  const [refreshing, setRefreshing] = useState(true);
 
   useEffect(() => {
     const loadToken = async () => {
       try {
+
         const storedToken = await AsyncStorage.getItem("token");
 
         if (storedToken !== null) {
@@ -42,10 +43,13 @@ export default function Home() {
           const authRes = await api.get("/login/protected", { headers });
 
           if (authRes.status !== 200) {
-            navigation.navigate('Login')
+            setRefreshing(false);
+            navigation.navigate("Login");
           }
+          setRefreshing(false);
         }
       } catch (error) {
+        setRefreshing(false);
         console.error("Erro ao carregar o token:", error);
       }
     };
@@ -102,9 +106,6 @@ export default function Home() {
     setRefreshing(true);
 
     // Simulação de fetch
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 2000);
   };
 
   return (
@@ -131,12 +132,16 @@ export default function Home() {
           />
         }
       >
-        <SaldoHome dataRef={dataRef} dateNow={dateNow}></SaldoHome>
-        <VisaoGeral dataRef={dataRef}></VisaoGeral>
-        <EconomiaMensal dataRef={dataRef}></EconomiaMensal>
-        <UltimosLancamentos dataref={dataRef}></UltimosLancamentos>
-        <DespesasPorCategoria dataRef={dataRef}></DespesasPorCategoria>
-        <ReceitasPorCategoria dataRef={dataRef}></ReceitasPorCategoria>
+        {!refreshing && (
+          <>
+            <SaldoHome dataRef={dataRef} dateNow={dateNow}></SaldoHome>
+            <VisaoGeral dataRef={dataRef}></VisaoGeral>
+            <EconomiaMensal dataRef={dataRef}></EconomiaMensal>
+            <UltimosLancamentos dataref={dataRef}></UltimosLancamentos>
+            <DespesasPorCategoria dataRef={dataRef}></DespesasPorCategoria>
+            <ReceitasPorCategoria dataRef={dataRef}></ReceitasPorCategoria>
+          </>
+        )}
         <ActionMenu
           visible={menuVisible}
           onClose={() => setMenuVisible(false)}

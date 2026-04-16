@@ -4,6 +4,7 @@ import {
   ButtonGeneral,
   ExternalContainer,
   InputText,
+  InternalContainer,
   NormalText,
   StyledDropdown,
   TitleBox,
@@ -108,7 +109,16 @@ export default function ExpenseEdit({ route }) {
   };
 
   return (
-    <ExternalContainer contentContainerStyle={{ gap: 15, padding: 5, paddingBotton:40 }}>
+    <ExternalContainer
+      contentContainerStyle={{
+        gap: 15,
+        paddingTop: 5,
+        paddingBottom: 50,
+        paddingLeft: 5,
+        paddingRight: 5,
+        
+      }}
+    >
       <TitleBox>
         <TitleText>Editar</TitleText>
       </TitleBox>
@@ -177,7 +187,7 @@ export default function ExpenseEdit({ route }) {
 
       <ButtonGeneral
         onPress={() => navigation.goBack()}
-        style={{ backgroundColor: "red" , marginBotton: 40}}
+        style={{ backgroundColor: "red" }}
       >
         <NormalText>Voltar</NormalText>
         <Ionicons name="arrow-undo-sharp" size={24} color="white" />

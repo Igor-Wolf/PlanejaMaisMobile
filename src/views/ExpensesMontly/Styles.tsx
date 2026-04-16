@@ -9,6 +9,14 @@ export const ExternalContainer = styled.ScrollView`
   padding-bottom: 20px;
 `;
 
+export const InternalContainer = styled.View`
+  
+  display: flex;
+  padding-bottom: 50px;
+
+
+`
+
 export const NormalText = styled.Text`
   color: white;
   font-weight: 600;
@@ -32,3 +40,4 @@ export const TitleText = styled.Text`
   font-weight: 600;
   font-size: 30px;
 `;
+

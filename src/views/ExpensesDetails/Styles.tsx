@@ -9,6 +9,8 @@ export const ExternalContainer = styled.ScrollView`
   padding-bottom: 20px;
 `;
 
+
+
 export const TitleBox = styled.View`
   display: flex;
   flex-direction: row;
@@ -35,7 +37,7 @@ export const ButtonGeneral = styled.TouchableOpacity`
   border-radius: 10px;
   elevation: 50;
 `;
-export const CategoryContainerExternal = styled.View`
+export const CategoryContainerExternal = styled.TouchableOpacity`
   align-self: flex-start;
 `;
 

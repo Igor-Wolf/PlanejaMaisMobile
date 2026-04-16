@@ -67,7 +67,10 @@ export default function MyAccount() {
 
   return (
     <ExternalContainer
-      contentContainerStyle={{ gap: 15, padding: 15, paddingBotton: 40 }}
+      contentContainerStyle={{ gap: 15, paddingTop: 5,
+        paddingBottom: 50,
+        paddingLeft: 5,
+        paddingRight: 5, }}
       // 4. Configuração do controle de atualização
       refreshControl={
         <RefreshControl
@@ -141,7 +144,7 @@ export default function MyAccount() {
 
       <ButtonGeneral
         onPress={() => navigation.goBack()}
-        style={{ backgroundColor: "red", marginBotton: 40 }}
+        style={{ backgroundColor: "red"}}
       >
         <NormalText style={{ color: "white" }}>Voltar</NormalText>
         <Ionicons name="arrow-undo-sharp" size={24} color="white" />

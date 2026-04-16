@@ -2,7 +2,7 @@
   "expo": {
     "name": "PlanejaMaisMobile",
     "slug": "PlanejaMaisMobile",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "orientation": "portrait",
     "icon": "./assets/logoicon.png",
     "userInterfaceStyle": "light",
@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/logoicon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "ios": {
       "supportsTablet": true
@@ -18,14 +18,14 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/logoicon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#000000"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
       "package": "com.anonymous.PlanejaMaisMobile"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/logoicon.png"
     },
     "plugins": [
       "@react-native-community/datetimepicker"

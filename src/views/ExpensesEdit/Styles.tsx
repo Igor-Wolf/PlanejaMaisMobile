@@ -8,6 +8,7 @@ export const ExternalContainer = styled.ScrollView`
   flex-direction: column;
   padding-top: 10px;
   padding-bottom: 20px;
+  
 `;
 
 export const TitleBox = styled.View`

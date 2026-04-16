@@ -1,4 +1,4 @@
-import { Alert, Text } from "react-native";
+import { Alert } from "react-native";
 import {
   ButtonDelete,
   ButtonGeneral,
@@ -14,10 +14,12 @@ import {
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { deleteExpenseService } from "./actions";
+import { useState } from "react";
 
 export default function ExpenseDetails({ route }) {
   const { item } = route.params;
   const navigation = useNavigation();
+  const [dataRef, setDataRef] = useState(new Date (item.date))
 
   const handlePressEdit = () => {
     navigation.navigate("EditarLancamento", { item });
@@ -35,7 +37,15 @@ export default function ExpenseDetails({ route }) {
   };
 
   return (
-    <ExternalContainer contentContainerStyle={{ gap: 15, padding: 5, paddingBotton: 40 }}>
+    <ExternalContainer
+      contentContainerStyle={{
+        gap: 15,
+        paddingTop: 5,
+        paddingBottom: 50,
+        paddingLeft: 5,
+        paddingRight: 5,
+      }}
+    >
       <TitleBox>
         <TitleText>Detalhes</TitleText>
         <ButtonDelete onPress={handlePressDelete}>
@@ -45,7 +55,17 @@ export default function ExpenseDetails({ route }) {
       <NormalText>Descrição:</NormalText>
       <LowerText>{item.description}</LowerText>
       <NormalText>Categoria:</NormalText>
-      <CategoryContainerExternal>
+      <CategoryContainerExternal
+      onPress={
+          
+        () => {
+          navigation.navigate("LancamentosMensaisPorCategoria", {
+            dataRef,
+            item: { type: item.value >= 0 ? "+" : "-" },
+            category: {value: item.category}
+          });
+        }
+        }>
         <CategoryContainer>
           <NormalText style={{ color: "white" }}>{item.category}</NormalText>
         </CategoryContainer>
@@ -89,7 +109,7 @@ export default function ExpenseDetails({ route }) {
       </ButtonGeneral>
       <ButtonGeneral
         onPress={() => navigation.goBack()}
-        style={{ backgroundColor: "red", marginBotton: 40 }}
+        style={{ backgroundColor: "red" }}
       >
         <NormalText>Voltar</NormalText>
         <Ionicons name="arrow-undo-sharp" size={24} color="white" />
