@@ -17,7 +17,7 @@ const COLORS = [
   "#1ABC9C",
 ];
 
-export default function DespesasPorCategoria({ dataRef}) {
+export default function DespesasPorCategoria({ dataRef }) {
   const navigation = useNavigation();
   const [chartData, setChartData] = useState([]);
   const [total, setTotal] = useState(0);
@@ -81,7 +81,7 @@ export default function DespesasPorCategoria({ dataRef}) {
                 navigation.navigate("LancamentosMensaisPorCategoria", {
                   dataRef,
                   item: { type: "-" },
-                  category: {value: key}
+                  category: { value: key },
                 });
               },
             };
@@ -117,7 +117,11 @@ export default function DespesasPorCategoria({ dataRef}) {
           backgroundColor: color,
         }}
       />
-      <Text style={{ color: "white", fontSize: 12 }} numberOfLines={1}>
+      <Text
+        ellipsizeMode="tail"
+        style={{ color: "white", fontSize: 12, flex: 1 }}
+        numberOfLines={1}
+      >
         {text}
       </Text>
     </View>

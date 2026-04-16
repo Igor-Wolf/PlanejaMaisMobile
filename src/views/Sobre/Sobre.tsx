@@ -1,4 +1,4 @@
-import { Linking, Text, View } from "react-native";
+import { Linking, RefreshControl, Text, View } from "react-native";
 import {
   ButtonText,
   DonwloadButton,
@@ -19,6 +19,7 @@ export default function Sobre() {
   const [versionReq, setVersionReq] = useState();
   const [urlReq, setUrlReq] = useState();
   const [dateBuild, setDateBuild] = useState();
+  const [refreshing, setRefreshing] = useState(true)
 
   const versionRequest = async () => {
     const response = await VersionApi.get("/latest");
@@ -28,11 +29,12 @@ export default function Sobre() {
       setUrlReq(response.data.assets[0].browser_download_url);
       setDateBuild(response.data.assets[0].updated_at);
     }
+    setRefreshing(false)
   };
 
   useEffect(() => {
     versionRequest();
-  }, []);
+  }, [refreshing]);
 
   const openUrl = async () => {
     if (urlReq) {
@@ -40,11 +42,26 @@ export default function Sobre() {
     }
   };
 
+   const handleRefresh = () => {
+    setRefreshing(true);
+
+    // Simulação de fetch
+  };
+
   return (
     <SclrollContainer contentContainerStyle={{ 
     paddingBottom: 40, // Ajuste o valor conforme a necessidade
     
-  }}>
+    }}
+    refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={handleRefresh}
+                tintColor="#6200ee"
+                colors={["#6200ee", "#03dac6"]}
+              />
+            }>
+      {!refreshing &&
       <GeneralContainer>
         <LogoImage source={MinhaFoto} />
         <NormalText>
@@ -66,6 +83,7 @@ export default function Sobre() {
         )}
        
       </GeneralContainer>
+      }
     </SclrollContainer>
   );
 }

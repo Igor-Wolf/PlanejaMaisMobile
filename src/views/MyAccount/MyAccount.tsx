@@ -17,7 +17,7 @@ export default function MyAccount() {
   const navigation = useNavigation();
 
   const [userData, setUserData] = useState(null);
-  const [refreshing, setRefreshing] = useState(false);
+  const [refreshing, setRefreshing] = useState(true);
 
   // 1. Função de busca isolada para ser reutilizada
   const userRequest = async () => {
@@ -31,6 +31,8 @@ export default function MyAccount() {
     } catch (error) {
       console.error(error);
       Alert.alert("Erro", "Não foi possível carregar os dados da conta.");
+    } finally {
+      setRefreshing(false)
     }
   };
 
@@ -81,6 +83,7 @@ export default function MyAccount() {
         />
       }
     >
+      {!refreshing && <>
       <TitleBox>
         <TitleText>Detalhes da Conta</TitleText>
         <ButtonDelete onPress={handlePressDelete}>
@@ -135,20 +138,22 @@ export default function MyAccount() {
       <LowerText>{userData?.isActive ? "Ativa" : "Inativa"}</LowerText>
 
       <ButtonGeneral
-        onPress={handlePressEdit}
-        style={{ backgroundColor: "#066e74", marginTop: 10 }}
+      onPress={handlePressEdit}
+      style={{ backgroundColor: "#066e74", marginTop: 10 }}
       >
         <NormalText style={{ color: "white" }}>Editar</NormalText>
         <Ionicons name="create-sharp" size={24} color="white" />
       </ButtonGeneral>
 
       <ButtonGeneral
-        onPress={() => navigation.goBack()}
-        style={{ backgroundColor: "red"}}
+      onPress={() => navigation.goBack()}
+      style={{ backgroundColor: "red"}}
       >
         <NormalText style={{ color: "white" }}>Voltar</NormalText>
         <Ionicons name="arrow-undo-sharp" size={24} color="white" />
       </ButtonGeneral>
+  </>
+  }
     </ExternalContainer>
   );
 }

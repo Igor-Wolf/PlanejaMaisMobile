@@ -7,4 +7,4 @@ Aplicativo Mobile do Planeja +
 
 
 
-- O APk completo pode ser baixado [aqui](https://github.com/Igor-Wolf/PlanejaMaisMobile/releases/download/v0.4.1/Planeja.apk).
+- O APk completo pode ser baixado [aqui](https://github.com/Igor-Wolf/PlanejaMaisMobile/releases/download/v0.4.2/Planeja.apk).

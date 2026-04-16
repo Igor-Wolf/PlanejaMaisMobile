@@ -71,8 +71,15 @@ export default function UltimasDespesas({date, category=''}) {
         lancamentos.map((item) => (
           <CardContainer key={item._id} onPress={() => handlePress(item)} onLongPress={(e) => openMenu(e, item)}>
             <LancamentosBoxLeft>
-              <NormalText>{item.description}</NormalText>
-              <LowerText>{item.category}</LowerText>
+              <NormalText
+                numberOfLines={1}
+                  ellipsizeMode="tail"
+                  style={{ flex: 1 }}
+              >{item.description}</NormalText>
+              <LowerText
+              numberOfLines={1}
+                  ellipsizeMode="tail"
+                  style={{ flex: 1 }}>{item.category}</LowerText>
             </LancamentosBoxLeft>
 
             <LancamentosBoxRight>

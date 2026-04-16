@@ -29,6 +29,7 @@ export const LancamentosBoxLeft = styled.View`
   justify-content: space-between;
   flex-direction: column;
   padding: 5px;
+  flex: 1;
 `;
 export const LancamentosBoxRight = styled.View`
   display: flex;

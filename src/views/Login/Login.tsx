@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { ActivityIndicator, Alert, View, TouchableOpacity, Linking } from "react-native"; // Importado TouchableOpacity
+import React, { useCallback, useState } from "react";
+import { ActivityIndicator, Alert, View, TouchableOpacity, Linking, BackHandler } from "react-native"; // Importado TouchableOpacity
 import {
   BoldText,
   Container,
@@ -14,7 +14,7 @@ import {
   RememberMeContainer,
 } from "./Styles";
 import Checkbox from "expo-checkbox";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { loginService } from "./actions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CREATEACCOUNT, FORGOTPASS } from "../../constants/frontLinks";
@@ -26,6 +26,35 @@ export default function Login() {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
   const [check, setCheck] = useState(false);
+
+
+
+
+useFocusEffect(
+    useCallback(() => {
+      const onBackPress = () => {
+        Alert.alert("Atenção!", "Deseja realmente sair do aplicativo?", [
+          { text: "Não", onPress: () => null, style: "cancel" },
+          { text: "Sim", onPress: () => BackHandler.exitApp() },
+        ]);
+        return true;
+      };
+
+      // 1. Criamos a assinatura (subscription)
+      const subscription = BackHandler.addEventListener(
+        "hardwareBackPress",
+        onBackPress,
+      );
+
+      // 2. No cleanup, chamamos o método .remove() da assinatura
+      return () => subscription.remove();
+    }, []),
+  );
+
+
+
+
+
 
   const handlePress = async () => {
     if (!user || !pass) {

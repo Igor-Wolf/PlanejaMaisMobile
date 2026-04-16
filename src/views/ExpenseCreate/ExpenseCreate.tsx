@@ -107,10 +107,15 @@ export default function ExpenseCreate({ route }) {
   };
 
   return (
-    <ExternalContainer contentContainerStyle={{ gap: 15, paddingTop: 5,
+    <ExternalContainer
+      contentContainerStyle={{
+        gap: 15,
+        paddingTop: 5,
         paddingBottom: 50,
         paddingLeft: 5,
-        paddingRight: 5,}}>
+        paddingRight: 5,
+      }}
+    >
       <TitleBox>
         <TitleText>Criar {item.type === "+" ? "Entrada" : "Despesa"}</TitleText>
       </TitleBox>
