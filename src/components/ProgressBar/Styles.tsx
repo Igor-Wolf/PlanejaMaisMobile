@@ -30,7 +30,7 @@ export const BarText =styled.Text`
     z-index:1;
     align-self: center;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
     
 
 `

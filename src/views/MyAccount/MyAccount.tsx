@@ -141,9 +141,6 @@ export default function MyAccount() {
           <NormalText>Email:</NormalText>
           <LowerText>{userData?.email || "..."}</LowerText>
 
-          <NormalText>Last Email:</NormalText>
-          <LowerText>{userData?.lastEmail || "..."}</LowerText>
-
           <NormalText>Aniversário:</NormalText>
           <LowerText>
             {formatDate(userData?.birthday, {

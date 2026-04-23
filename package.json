@@ -1,6 +1,6 @@
 {
   "name": "planejamaismobile",
-  "version": "0.5",
+  "version": "0.5.1",
   "main": "index.ts",
   "scripts": {
     "start": "expo start",

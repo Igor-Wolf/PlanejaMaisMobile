@@ -10,7 +10,7 @@ export const MenuBox = styled.View`
   position: absolute;
   right: 20px;       /* Ajuste conforme a posição do seu botão + */
   bottom: 30px;        /* Ajuste conforme a altura do seu botão + */
-  width: 150px;
+  width: 180px;
   background-color: #1a1a1a; /* Fundo preto/grafite */
   border-radius: 12px;
   padding: 10px;

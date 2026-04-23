@@ -3,7 +3,11 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import Home from "../views/Home/Home";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import {
+  CommonActions,
+  StackActions,
+  useNavigation,
+} from "@react-navigation/native";
 import Sobre from "../views/Sobre/Sobre";
 import LancamentosStack from "./LancamentosStack";
 import MyAccountStack from "./MyAccountStack";
@@ -16,7 +20,7 @@ export default function MyDrawer() {
   return (
     <Drawer.Navigator
       initialRouteName="Lancamentos"
-      screenOptions={{        
+      screenOptions={{
         drawerStyle: {
           backgroundColor: "#2e2d2d",
           width: 240,
@@ -46,14 +50,33 @@ export default function MyDrawer() {
         name="Lancamentos"
         component={LancamentosStack}
         options={{
-          title: "Lançamentos" 
-
-         }}
+          title: "Lançamentos",
+        }}
       />
       <Drawer.Screen
         name="Metas"
         component={MetasStack}
         options={{ title: "Metas" }}
+        listeners={({ navigation }) => ({
+          drawerItemPress: (e) => {
+            // 1. Impedimos a navegação padrão que apenas "mostra" a stack como ela estava
+            e.preventDefault();
+
+            // 2. Disparamos um reset focado APENAS no nome desta rota
+            // Isso reconstrói a pilha interna da LancamentosStack sem tocar nas outras telas do Drawer
+            navigation.reset({
+              index: 0,
+              routes: [
+                {
+                  name: "Metas",
+                  state: {
+                    routes: [{ name: "MinhasMetas" }], // <--- Troque pelo nome real da tela inicial
+                  },
+                },
+              ],
+            });
+          },
+        })}
       />
       <Drawer.Screen
         name="MinhaConta"

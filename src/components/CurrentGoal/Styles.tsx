@@ -44,7 +44,9 @@ export const NormalTextCategory = styled.Text`
   font-size: 18px;
   border-radius: 50px;
   border: 1px solid white;
-  padding: 5px;
+  padding: 3px;
+  padding-left: 15px;
+  padding-right: 15px;
 `;
 export const NormalText = styled.Text`
   color: white;
