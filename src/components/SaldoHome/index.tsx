@@ -64,7 +64,7 @@ export default function SaldoHome({ dataRef, dateNow }) {
   // Função auxiliar para formatar moeda (deixa o JSX mais limpo)
   const formatCurrency = (value) => {
     const num = Number(value) || 0;
-    const formatted = Math.abs(num).toFixed(2).replace('.', ',');
+    const formatted = Math.abs(num).toFixed(2);
     return num < 0 ? `- R$ ${formatted}` : `R$ ${formatted}`;
   };
 
