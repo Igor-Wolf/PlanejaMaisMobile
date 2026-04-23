@@ -1,5 +1,5 @@
 # PlanejaMaisMobile
-Aplicativo Mobile do Planeja +
+Aplicativo Mobile do Planeja +, app de lançamento de receitas e gastos pessoais.
 
 
 
