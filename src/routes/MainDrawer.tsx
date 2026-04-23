@@ -16,7 +16,7 @@ export default function MyDrawer() {
   return (
     <Drawer.Navigator
       initialRouteName="Lancamentos"
-      screenOptions={{
+      screenOptions={{        
         drawerStyle: {
           backgroundColor: "#2e2d2d",
           width: 240,
@@ -45,7 +45,10 @@ export default function MyDrawer() {
       <Drawer.Screen
         name="Lancamentos"
         component={LancamentosStack}
-        options={{ title: "Lançamentos" }}
+        options={{
+          title: "Lançamentos" 
+
+         }}
       />
       <Drawer.Screen
         name="Metas"

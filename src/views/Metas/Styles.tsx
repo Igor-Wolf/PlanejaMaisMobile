@@ -18,3 +18,22 @@ export const NormalText = styled.Text`
     font-size: 18px;
 
 `
+
+
+export const Create = styled.TouchableOpacity`
+    position: absolute;
+    right: 20px;
+    bottom: 60px;
+    display: flex;
+    background-color: #066e74;
+    border-radius: 15px;
+    padding: 5px;
+    margin: 5px;
+    width: 60px;
+    height: 60px;
+    align-items: center;
+    justify-content:center;
+    border: 1px solid black;
+    z-index: 2;
+    elevation: 5;
+    `

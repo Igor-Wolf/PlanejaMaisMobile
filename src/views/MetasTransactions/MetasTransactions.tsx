@@ -14,25 +14,24 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import * as yup from "yup"; // Importação mantida como 'yup'
-import { editExpenseService } from "./actions";
+import { createExpenseService } from "./actions";
 
-export default function ExpenseEdit({ route }) {
-  const { item } = route.params;
+export default function MetasTransactions({ route }) {
+  const { item, categoryItem } = route.params || {};
   const navigation = useNavigation();
 
   // Estados dos inputs
-  const [description, setDescription] = useState(item.description);
-  const [category, setCategory] = useState(item.category);
-  const [valueExpense, setValueExpense] = useState(
-    String(Math.abs(item.value).toFixed(2)),
-  );
-  const [date, setDate] = useState(new Date(item.date));
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState(categoryItem.name);
+  const [valueExpense, setValueExpense] = useState("");
+  const [date, setDate] = useState(new Date());
+
   const [showPicker, setShowPicker] = useState(false);
-  const [type, setType] = useState(item.value >= 0 ? "Entrada" : "Despesa");
+  const [type, setType] = useState(item.type === "+" ? "Adicionar" : "Retirar");
 
   const data = [
-    { label: "Entrada", value: "Entrada" },
-    { label: "Despesa", value: "Despesa" },
+    { label: "Adicionar", value: "Adicionar" },
+    { label: "Retirar", value: "Retirar" },
   ];
 
   // Schema de Validação
@@ -70,7 +69,7 @@ export default function ExpenseEdit({ route }) {
       // Se validado, prepara o objeto final (ajustando o sinal pelo tipo)
       const numericValue = Number(valueExpense.replace(",", "."));
       const finalValue =
-        type === "Despesa" ? -Math.abs(numericValue) : Math.abs(numericValue);
+        type === "Adicionar" ? -Math.abs(numericValue) : Math.abs(numericValue);
 
       const updatedExpense = {
         description,
@@ -81,11 +80,11 @@ export default function ExpenseEdit({ route }) {
       };
 
       try {
-        const response = await editExpenseService(item._id, updatedExpense);
+        const response = await createExpenseService(updatedExpense);
 
-        if (response.status === 200) {
-          Alert.alert("Sucesso", "Lançamento atualizado com sucesso!");
-          navigation.navigate("Home");
+        if (response.status === 201) {
+          Alert.alert("Sucesso", "Lançamento criado com sucesso!");
+          navigation.navigate("MinhasMetas");
         }
       } catch {}
 
@@ -115,11 +114,12 @@ export default function ExpenseEdit({ route }) {
         paddingBottom: 50,
         paddingLeft: 5,
         paddingRight: 5,
-        
       }}
     >
       <TitleBox>
-        <TitleText>Editar</TitleText>
+        <TitleText>
+          {item.type === "+" ? "Adicionar" : "Retirar"} Investimento
+        </TitleText>
       </TitleBox>
 
       <NormalText>Descrição:</NormalText>
@@ -133,7 +133,6 @@ export default function ExpenseEdit({ route }) {
       <NormalText>Categoria:</NormalText>
       <InputText
         value={category}
-        onChangeText={setCategory}
         placeholder="Digite a categoria"
         placeholderTextColor="black"
       />
@@ -145,16 +144,6 @@ export default function ExpenseEdit({ route }) {
         placeholder="Digite o valor"
         keyboardType="numeric"
         placeholderTextColor="black"
-      />
-
-      <NormalText>Tipo:</NormalText>
-      <StyledDropdown
-        data={data}
-        labelField="label"
-        valueField="value"
-        placeholder="Selecione o tipo"
-        value={type}
-        onChange={(item) => setType(item.value)}
       />
 
       <NormalText>Data do Lançamento:</NormalText>
@@ -180,8 +169,8 @@ export default function ExpenseEdit({ route }) {
         onPress={handleSave}
         style={{ backgroundColor: "#066e74" }}
       >
-        <NormalText style={{ color: "white" }}>Salvar Alterações</NormalText>
-        <Ionicons name="save-outline" size={24} color="white" />
+        <NormalText>Salvar</NormalText>
+        <Ionicons name="create-sharp" size={24} color="white" />
       </ButtonGeneral>
 
       <ButtonGeneral

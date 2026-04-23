@@ -1,5 +1,12 @@
 import React, { useCallback, useState } from "react";
-import { ActivityIndicator, Alert, View, TouchableOpacity, Linking, BackHandler } from "react-native"; // Importado TouchableOpacity
+import {
+  ActivityIndicator,
+  Alert,
+  View,
+  TouchableOpacity,
+  Linking,
+  BackHandler,
+} from "react-native"; // Importado TouchableOpacity
 import {
   BoldText,
   Container,
@@ -27,10 +34,7 @@ export default function Login() {
   const [pass, setPass] = useState("");
   const [check, setCheck] = useState(false);
 
-
-
-
-useFocusEffect(
+  useFocusEffect(
     useCallback(() => {
       const onBackPress = () => {
         Alert.alert("Atenção!", "Deseja realmente sair do aplicativo?", [
@@ -51,16 +55,11 @@ useFocusEffect(
     }, []),
   );
 
-
-
-
-
-
   const handlePress = async () => {
     if (!user || !pass) {
       Alert.alert("Erro", "Preencha usuário e senha");
       return;
-    }    
+    }
 
     setLoading(true);
     try {
@@ -73,6 +72,11 @@ useFocusEffect(
         // Se o login for sucesso, navegamos e paramos o loading
         setLoading(false);
         navigation.navigate("Drawer");
+      } else if (response && response.status === 409) {
+        Alert.alert(
+          "Erro",
+          "Usuário usuário precisa autenticar a conta por email",
+        );
       } else {
         setLoading(false);
         Alert.alert("Erro", "Usuário ou senha inválidos");
@@ -83,11 +87,11 @@ useFocusEffect(
     }
   };
   const handleForgotPass = async () => {
-      await Linking.openURL(FORGOTPASS);
-    }
+    await Linking.openURL(FORGOTPASS);
+  };
   const handleCreateAccount = async () => {
-      await Linking.openURL(CREATEACCOUNT);
-    }
+    await Linking.openURL(CREATEACCOUNT);
+  };
   return (
     <Container>
       <ImageContainerExternal>
@@ -101,6 +105,7 @@ useFocusEffect(
         value={user}
         onChangeText={setUser}
         placeholder="Digite o nome usuario"
+        placeholderTextColor="black"
       />
 
       <BoldText>Senha:</BoldText>
@@ -109,28 +114,28 @@ useFocusEffect(
         onChangeText={setPass}
         secureTextEntry={true}
         placeholder="Digite a senha"
+        placeholderTextColor="black"
       />
       <RememberMeContainer>
-
-      {/* Melhoria de UX: Clicar na View toda marca o checkbox */}
-      <TouchableOpacity
-        style={{ flexDirection: "row", alignItems: "center", marginTop: 15 }}
-        onPress={() => setCheck(!check)}
-        activeOpacity={0.7}
+        {/* Melhoria de UX: Clicar na View toda marca o checkbox */}
+        <TouchableOpacity
+          style={{ flexDirection: "row", alignItems: "center", marginTop: 15 }}
+          onPress={() => setCheck(!check)}
+          activeOpacity={0.7}
         >
-        <Checkbox
-          value={check}
-          onValueChange={setCheck}
-          color={check ? "#0084ff" : undefined}
+          <Checkbox
+            value={check}
+            onValueChange={setCheck}
+            color={check ? "#54DBEA" : undefined}
           />
-        <BoldText style={{ marginLeft: 8, color: "black" }}>
-          Lembrar de mim?
-        </BoldText>
+          <BoldText style={{ marginLeft: 8, color: "black" , fontSize: 16}}>
+            Lembrar de mim?
+          </BoldText>
         </TouchableOpacity>
         <ForgotPassButton onPress={handleForgotPass}>
           <LinkText>Esqueceu a senha?</LinkText>
         </ForgotPassButton>
-          </RememberMeContainer>
+      </RememberMeContainer>
 
       <ContainerButton>
         {/* Desabilitar o botão enquanto carrega evita cliques duplos */}

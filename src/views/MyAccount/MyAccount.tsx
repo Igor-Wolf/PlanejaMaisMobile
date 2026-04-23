@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { RefreshControl, Alert } from "react-native";
+import { RefreshControl, Alert, ActivityIndicator } from "react-native";
 import {
   ButtonDelete,
   ButtonGeneral,
@@ -9,15 +9,17 @@ import {
   TitleBox,
   TitleText,
 } from "./Styles";
-import { getUserInfo } from "./actions";
+import { deleteUser, getUserInfo } from "./actions";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function MyAccount() {
   const navigation = useNavigation();
 
   const [userData, setUserData] = useState(null);
   const [refreshing, setRefreshing] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   // 1. Função de busca isolada para ser reutilizada
   const userRequest = async () => {
@@ -26,13 +28,13 @@ export default function MyAccount() {
       if (response.status === 200) {
         setUserData(response.data);
       } else {
-        navigation.navigate('Login')
+        navigation.navigate("Login");
       }
     } catch (error) {
       console.error(error);
       Alert.alert("Erro", "Não foi possível carregar os dados da conta.");
     } finally {
-      setRefreshing(false)
+      setRefreshing(false);
     }
   };
 
@@ -40,7 +42,7 @@ export default function MyAccount() {
   useFocusEffect(
     useCallback(() => {
       userRequest();
-    }, [])
+    }, []),
   );
 
   // 3. Função para o Pull-to-Refresh
@@ -56,9 +58,29 @@ export default function MyAccount() {
     }
   };
 
-  const handlePressDelete = async () => {
-    // Lógica de deleção aqui
-    Alert.alert("Aviso", "Funcionalidade de deleção em desenvolvimento.");
+  const handleDelete = async () => {
+    setLoading(true);
+    const response = await deleteUser();
+
+    if (response && response.status === 200) {
+      console.log("Usuário deletado com sucesso");
+      await AsyncStorage.removeItem("token");
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "LoginPage" }],
+      });
+    }
+    setLoading(false);
+  };
+
+  const handlePressDelete = () => {
+    Alert.alert("Atenção!", "Deseja realmente excluir sua conta?", [
+      { text: "Não", style: "cancel" },
+      {
+        text: "Sim",
+        onPress: handleDelete, // Apenas passe a referência aqui
+      },
+    ]);
   };
 
   // Função auxiliar para evitar erros de "Invalid Date" antes dos dados chegarem
@@ -69,10 +91,13 @@ export default function MyAccount() {
 
   return (
     <ExternalContainer
-      contentContainerStyle={{ gap: 15, paddingTop: 5,
+      contentContainerStyle={{
+        gap: 15,
+        paddingTop: 5,
         paddingBottom: 50,
         paddingLeft: 5,
-        paddingRight: 5, }}
+        paddingRight: 5,
+      }}
       // 4. Configuração do controle de atualização
       refreshControl={
         <RefreshControl
@@ -83,77 +108,93 @@ export default function MyAccount() {
         />
       }
     >
-      {!refreshing && <>
-      <TitleBox>
-        <TitleText>Detalhes da Conta</TitleText>
-        <ButtonDelete onPress={handlePressDelete}>
-          <Ionicons name="trash-outline" size={24} color="white" />
-        </ButtonDelete>
-      </TitleBox>
+      {loading && (
+        <ActivityIndicator
+          size="large"
+          color="#54DBEA"
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        />
+      )}
+      {!refreshing && (
+        <>
+          <TitleBox>
+            <TitleText>Detalhes da Conta</TitleText>
+            <ButtonDelete onPress={handlePressDelete}>
+              <Ionicons name="trash-outline" size={24} color="white" />
+            </ButtonDelete>
+          </TitleBox>
 
-      <NormalText>Nome:</NormalText>
-      <LowerText>{userData?.name || "Carregando..."}</LowerText>
+          <NormalText>Nome:</NormalText>
+          <LowerText>{userData?.name || "Carregando..."}</LowerText>
 
-      <NormalText>Usuário:</NormalText>
-      <LowerText>{userData?.user || "..."}</LowerText>
+          <NormalText>Usuário:</NormalText>
+          <LowerText>{userData?.user || "..."}</LowerText>
 
-      <NormalText>Email:</NormalText>
-      <LowerText>{userData?.email || "..."}</LowerText>
+          <NormalText>Email:</NormalText>
+          <LowerText>{userData?.email || "..."}</LowerText>
 
-      <NormalText>Last Email:</NormalText>
-      <LowerText>{userData?.lastEmail || "..."}</LowerText>
+          <NormalText>Last Email:</NormalText>
+          <LowerText>{userData?.lastEmail || "..."}</LowerText>
 
-      <NormalText>Aniversário:</NormalText>
-      <LowerText>
-        {formatDate(userData?.birthday, {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-        })}
-      </LowerText>
+          <NormalText>Aniversário:</NormalText>
+          <LowerText>
+            {formatDate(userData?.birthday, {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+            })}
+          </LowerText>
 
-      <NormalText>Criação:</NormalText>
-      <LowerText>
-        {formatDate(userData?.createdAt, {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-        })}
-      </LowerText>
+          <NormalText>Criação:</NormalText>
+          <LowerText>
+            {formatDate(userData?.createdAt, {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </LowerText>
 
-      <NormalText>Última Atualização:</NormalText>
-      <LowerText>
-        {formatDate(userData?.updatedAt, {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-        })}
-      </LowerText>
+          <NormalText>Última Atualização:</NormalText>
+          <LowerText>
+            {formatDate(userData?.updatedAt, {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </LowerText>
 
-      <NormalText>Situação da Conta:</NormalText>
-      <LowerText>{userData?.isActive ? "Ativa" : "Inativa"}</LowerText>
+          <NormalText>Situação da Conta:</NormalText>
+          <LowerText>{userData?.isActive ? "Ativa" : "Inativa"}</LowerText>
 
-      <ButtonGeneral
-      onPress={handlePressEdit}
-      style={{ backgroundColor: "#066e74", marginTop: 10 }}
-      >
-        <NormalText style={{ color: "white" }}>Editar</NormalText>
-        <Ionicons name="create-sharp" size={24} color="white" />
-      </ButtonGeneral>
+          <ButtonGeneral
+            onPress={handlePressEdit}
+            style={{ backgroundColor: "#066e74", marginTop: 10 }}
+          >
+            <NormalText style={{ color: "white" }}>Editar</NormalText>
+            <Ionicons name="create-sharp" size={24} color="white" />
+          </ButtonGeneral>
 
-      <ButtonGeneral
-      onPress={() => navigation.goBack()}
-      style={{ backgroundColor: "red"}}
-      >
-        <NormalText style={{ color: "white" }}>Voltar</NormalText>
-        <Ionicons name="arrow-undo-sharp" size={24} color="white" />
-      </ButtonGeneral>
-  </>
-  }
+          <ButtonGeneral
+            onPress={() => navigation.goBack()}
+            style={{ backgroundColor: "red" }}
+          >
+            <NormalText style={{ color: "white" }}>Voltar</NormalText>
+            <Ionicons name="arrow-undo-sharp" size={24} color="white" />
+          </ButtonGeneral>
+        </>
+      )}
     </ExternalContainer>
   );
 }

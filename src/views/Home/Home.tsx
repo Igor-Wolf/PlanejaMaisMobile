@@ -19,6 +19,7 @@ import EconomiaMensal from "../../components/EconomiaMensal";
 import DespesasPorCategoria from "../../components/DespesasPorCategoria";
 import ReceitasPorCategoria from "../../components/ReceitasPorCategoria";
 import { api } from "../../api/backApi";
+import CurrentGoals from "../../components/CurrentGoal";
 
 export default function Home() {
   const navigation = useNavigation();
@@ -32,7 +33,6 @@ export default function Home() {
   useEffect(() => {
     const loadToken = async () => {
       try {
-
         const storedToken = await AsyncStorage.getItem("token");
 
         if (storedToken !== null) {
@@ -44,7 +44,10 @@ export default function Home() {
 
           if (authRes.status !== 200) {
             setRefreshing(false);
-            navigation.navigate("Login");
+            navigation.reset({
+              index: 0,
+              routes: [{ name: "LoginPage" }],
+            });
           }
           setRefreshing(false);
         }
@@ -136,6 +139,7 @@ export default function Home() {
           <>
             <SaldoHome dataRef={dataRef} dateNow={dateNow}></SaldoHome>
             <VisaoGeral dataRef={dataRef}></VisaoGeral>
+            <CurrentGoals dataRef={dataRef}></CurrentGoals>
             <EconomiaMensal dataRef={dataRef}></EconomiaMensal>
             <UltimosLancamentos dataref={dataRef}></UltimosLancamentos>
             <DespesasPorCategoria dataRef={dataRef}></DespesasPorCategoria>

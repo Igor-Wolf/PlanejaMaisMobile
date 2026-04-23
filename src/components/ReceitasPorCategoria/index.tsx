@@ -193,7 +193,7 @@ export default function ReceitasPorCategoria({ dataRef }) {
             </>
           ) : (
             <Text style={{ color: "white", padding: 20 }}>
-              Nenhuma despesa encontrada
+              Nenhuma receita encontrada
             </Text>
           )}
         </GraphicView>

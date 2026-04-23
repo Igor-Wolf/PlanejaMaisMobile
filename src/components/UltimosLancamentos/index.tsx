@@ -52,7 +52,7 @@ export default function UltimosLancamentos() {
     };
 
     loadData();
-  }, []); // <--- OBRIGATÓRIO ser um Array [dataRef]
+  }, []);
 
   const handlePress = (item) => {
     navigation.navigate("Detalhes", { item });
@@ -99,8 +99,8 @@ export default function UltimosLancamentos() {
           </CardContainer>
         ))
       ) : (
-        <NormalText style={{ textAlign: "center", marginTop: 20 }}>
-          Nenhum lançamento encontrado para este mês.
+        <NormalText style={{ textAlign: "center", marginTop: 20, fontSize: 14 }}>
+          Nenhum lançamento encontrado
         </NormalText>
       )}
     </LancamentosView>

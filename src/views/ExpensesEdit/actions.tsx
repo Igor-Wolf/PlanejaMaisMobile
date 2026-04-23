@@ -11,8 +11,7 @@ export const editExpenseService = async (
     if (!storedToken) return;
     const headersRes = { Authorization: `Bearer ${storedToken}` };
 
-    console.log(_id)
-    console.log(body)
+   
   try {
 const response = await api.patch(`/expense/update/${_id}`, body, { headers: headersRes });    console.log("SUCESSO:", response.status);
     return response;
